@@ -5,12 +5,6 @@ pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
 }
 
 impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
-    pub fn new(data: [[T; COLS]; ROWS]) -> Self {
-        Self {
-            data: Box::new(data),
-        }
-    }
-
     pub fn prod(&self, other: u8) {
         todo!("Matrix multiplication");
     }
@@ -43,5 +37,27 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Default for Matrix
 impl<T: PartialEq, const ROWS: usize, const COLS: usize> PartialEq for Matrix<T, ROWS, COLS> {
     fn eq(&self, other: &Self) -> bool {
         self.data == other.data
+    }
+}
+
+impl<T, const ROWS: usize, const COLS: usize> From<[[T; COLS]; ROWS]> for Matrix<T, ROWS, COLS> {
+    fn from(value: [[T; COLS]; ROWS]) -> Self {
+        Self {
+            data: Box::new(value),
+        }
+    }
+}
+
+impl<T, const ROWS: usize, const COLS: usize> AsRef<Matrix<T, ROWS, COLS>>
+    for Matrix<T, ROWS, COLS>
+{
+    fn as_ref(&self) -> &Matrix<T, ROWS, COLS> {
+        &self
+    }
+}
+
+impl<T, const ROWS: usize, const COLS: usize> AsRef<[[T; COLS]; ROWS]> for Matrix<T, ROWS, COLS> {
+    fn as_ref(&self) -> &[[T; COLS]; ROWS] {
+        &self.data
     }
 }

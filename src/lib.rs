@@ -16,8 +16,8 @@ mod tests {
 
     #[test]
     fn matrix() {
-        let matrix: Matrix<i8, 3, 3> = Matrix::new([[1; 3]; 3]);
-        // let matrix2: Matrix<i8, 3, 3> = Matrix::new([[1; 3]; 3]);
+        let matrix: Matrix<i8, 3, 3> = Matrix::from([[1; 3]; 3]);
+        // let matrix2: Matrix<i8, 3, 3> = Matrix::from([[1; 3]; 3]);
         // let matrix3 = &matrix + &matrix2;
         // let a = &matrix[[0, 0]];
         // println!("{:?}", a);
