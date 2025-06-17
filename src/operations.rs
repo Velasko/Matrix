@@ -28,13 +28,24 @@ macro_rules! impl_op {
             type Output = Self;
 
             fn $op(self, rhs: &Matrix<RT, ROWS, COLS>) -> Self::Output {
-                let mut this = self;
                 for i in 0..ROWS {
                     for j in 0..COLS {
-                        this.data[i][j] = $trait::$op(&this.data[i][j], &rhs[i][j]);
+                        self.data[i][j] = $trait::$op(&self.data[i][j], &rhs[i][j]);
                     }
                 }
-                this
+                self
+            }
+        }
+
+        impl<LT, RT, const ROWS: usize, const COLS: usize> $trait<Matrix<RT, ROWS, COLS>>
+            for Matrix<LT, ROWS, COLS>
+        where
+            for<'a, 'b> &'a LT: $trait<&'b RT, Output = LT>,
+        {
+            type Output = Self;
+
+            fn $op(self, rhs: Matrix<RT, ROWS, COLS>) -> Self::Output {
+                $trait::$op(self, &rhs)
             }
         }
     };
