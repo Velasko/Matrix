@@ -16,7 +16,19 @@ macro_rules! impl_op {
                 let matrix: [[OT; COLS]; ROWS] =
                     from_fn(|i| from_fn(|j| $trait::$op(&self[i][j], &rhs[i][j])));
 
-                Self::Output::new(matrix)
+                Self::Output::from(matrix)
+            }
+        }
+
+        impl<LT, RT, OT, const ROWS: usize, const COLS: usize> $trait<Matrix<RT, ROWS, COLS>>
+            for &Matrix<LT, ROWS, COLS>
+        where
+            for<'a, 'b> &'a LT: $trait<&'b RT, Output = OT>,
+        {
+            type Output = Matrix<OT, ROWS, COLS>;
+
+            fn $op(self, rhs: Matrix<RT, ROWS, COLS>) -> Self::Output {
+                $trait::$op(self, &rhs)
             }
         }
 
@@ -27,7 +39,7 @@ macro_rules! impl_op {
         {
             type Output = Self;
 
-            fn $op(self, rhs: &Matrix<RT, ROWS, COLS>) -> Self::Output {
+            fn $op(mut self, rhs: &Matrix<RT, ROWS, COLS>) -> Self::Output {
                 for i in 0..ROWS {
                     for j in 0..COLS {
                         self.data[i][j] = $trait::$op(&self.data[i][j], &rhs[i][j]);
@@ -44,7 +56,8 @@ macro_rules! impl_op {
         {
             type Output = Self;
 
-            fn $op(self, rhs: Matrix<RT, ROWS, COLS>) -> Self::Output {
+            #[allow(unused_mut)]
+            fn $op(mut self, rhs: Matrix<RT, ROWS, COLS>) -> Self::Output {
                 $trait::$op(self, &rhs)
             }
         }
