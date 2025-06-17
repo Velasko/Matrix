@@ -3,8 +3,8 @@
 #![allow(dead_code)]
 
 mod base;
+mod general_operations;
 mod index;
-mod operations;
 mod square_matrix;
 mod vector;
 
