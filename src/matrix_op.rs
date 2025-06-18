@@ -8,7 +8,7 @@ use std::{
 
 use crate::base::Matrix;
 
-impl<T: std::fmt::Debug, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
+impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
     pub fn transpose(self) -> Matrix<T, COLS, ROWS> {
         let mut data = *self.data;
         let transposed: [[T; ROWS]; COLS] = unsafe {
