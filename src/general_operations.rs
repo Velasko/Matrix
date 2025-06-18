@@ -81,6 +81,11 @@ mod tests {
     use super::*;
 
     #[test]
+    fn general_operations() {
+        todo!("Implement general operations testing");
+    }
+
+    #[test]
     fn multipy() {
         const SIZE: usize = 1290;
         let matrix: Matrix<i8, SIZE, SIZE> = Matrix::default();
