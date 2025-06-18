@@ -5,6 +5,7 @@
 mod base;
 mod general_operations;
 mod index;
+mod matrix_op;
 mod square_matrix;
 mod vector;
 

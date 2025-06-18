@@ -4,12 +4,6 @@ pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
     pub(crate) data: Box<[[T; COLS]; ROWS]>,
 }
 
-impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
-    pub fn prod(&self, other: u8) {
-        todo!("Matrix multiplication");
-    }
-}
-
 impl<T: Debug, const ROWS: usize, const COLS: usize> Debug for Matrix<T, ROWS, COLS> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct(format!("Matrix<{:?}> {}x{}:", type_name::<T>(), ROWS, COLS).as_str())
