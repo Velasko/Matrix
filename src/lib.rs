@@ -9,6 +9,15 @@ mod matrix_op;
 mod square_matrix;
 mod vector;
 
+// Operations to do (and by ref):
+// Add
+// Sub
+// Mult by scalar
+// divide by scalar
+// Determinant
+// Transpose
+// Inverse
+
 #[cfg(test)]
 mod tests {
     use super::*;

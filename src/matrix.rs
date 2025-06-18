@@ -7,14 +7,6 @@ use std::{
     ops::{Add, AddAssign, BitAnd, Index, IndexMut, Mul, MulAssign, Range, Sub},
 };
 
-// Operations to do (and by ref):
-// Add
-// Sub
-// Mult by scalar
-// divide by scalar
-// Determinant
-// Transpose
-// Inverse
 impl<LT, RT, OT, const ROWS: usize, const COLS: usize> Add<&Matrix<RT, ROWS, COLS>>
     for &Matrix<LT, ROWS, COLS>
 where
