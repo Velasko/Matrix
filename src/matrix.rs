@@ -15,26 +15,6 @@ use std::{
 // Determinant
 // Transpose
 // Inverse
-
-// Is optmized if transposed beforehand
-// This is the wrong impl. This is internal product with transpose...
-impl<LT, RT, OT, const LROWS: usize, const CSIZE: usize, const RCOLS: usize>
-    Mul<&Matrix<RT, CSIZE, RCOLS>> for &Matrix<LT, LROWS, CSIZE>
-where
-    LT: Copy + for<'a> Mul<&'a RT, Output = OT>,
-    OT: Sum,
-{
-    type Output = Matrix<OT, LROWS, RCOLS>;
-
-    fn mul(self, rhs: &Matrix<RT, CSIZE, RCOLS>) -> Self::Output {
-        let matrix: [[OT; RCOLS]; LROWS] =
-            // from_fn(|i| from_fn(|j| self.data[i][j] * &rhs.data[j][i]));
-            from_fn(|i| from_fn(|j| (0..CSIZE).map(|a| self.data[i][a] * &rhs.data[a][j]).sum() )) ;
-
-        Self::Output::new(matrix)
-    }
-}
-
 impl<LT, RT, OT, const ROWS: usize, const COLS: usize> Add<&Matrix<RT, ROWS, COLS>>
     for &Matrix<LT, ROWS, COLS>
 where
