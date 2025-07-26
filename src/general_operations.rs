@@ -2,6 +2,8 @@ use std::array::from_fn;
 
 use crate::base::Matrix;
 
+// General trait implementation for common operations for values and their references
+// the "for &Matrix<...>" allocate new memory while the others do an inplace
 macro_rules! impl_op {
     ($trait:tt, $op:tt) => {
         use std::ops::$trait;
@@ -64,6 +66,7 @@ macro_rules! impl_op {
     };
 }
 
+// Standard default operations
 impl_op!(Add, add);
 impl_op!(Sub, sub);
 impl_op!(Mul, mul);
@@ -82,6 +85,7 @@ mod tests {
 
     #[test]
     fn general_operations() {
+        // Test every 4 ref/ownership for functions T + R -> T and T + R -> O
         todo!("Implement general operations testing");
     }
 
