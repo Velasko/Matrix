@@ -48,8 +48,9 @@ mod tests {
 
     #[test]
     fn transpose_test() {
-        let mut a: [[u8; 2]; 3] = [[0; 2]; 3];
-        a[1][0] = 1;
+        const ROWS: usize = 3;
+        const COLS: usize = 2;
+        let a: [[usize; COLS]; ROWS] = from_fn(|i| from_fn(|j| j + i * COLS));
         let a = Matrix::from(a);
         println!("Initial: {:?}", a);
         let a = a.transpose();
